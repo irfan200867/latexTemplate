@@ -1,2 +1,3 @@
 # latexTemplate
-Selected slides and articles LaTeX templates.
+
+Selected slides and articles \LaTeX\ templates.
