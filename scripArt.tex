@@ -1,0 +1,257 @@
+% PDF build: latex -> bibtex -> latex -> dvips -> ps2pdf
+% 0. Document class, options, and adjusted line spread.
+
+%\documentclass[paper=a4paper,fontsize=11pt,pagesize,parskip=half-,numbers=noendperiod,
+%               captions=nooneline,abstract=true,twocolumn=false,twoside=true]{scrartcl}
+\documentclass[paper=160mm:90mm,fontsize=12pt,pagesize,parskip=half-,numbers=noendperiod,
+              captions=nooneline,abstract=true,twocolumn=false,landscape]{scrartcl}
+\linespread{1.12}
+
+\usepackage[T1]{fontenc}
+\usepackage{scrlayer-scrpage}
+\usepackage{lmodern,amsmath,amsfonts,amssymb,microtype,graphicx,color,xcolor,hyperref,tikz,multicol}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[bahasa]{babel}
+
+% 1. Packages and options for adjusting the page structure
+\usepackage{calc}
+\usepackage[includeheadfoot,top=3.5mm,bottom=3.5mm,left=5.5mm,right=5.5mm,headsep=6.5mm,
+           footskip=8.5mm]{geometry}
+\usepackage{tocstyle}
+\usepackage{lipsum}
+\usepackage[square]{natbib}             % bibliography style package
+
+\bibpunct{(}{)}{;}{a}{}{,}              % bibliography style format:
+                                        %         author [year]
+
+\setlength\columnsep{30pt}
+
+% 2. Some definitions
+\newcommand{\judul}{Slide Aku}
+\newcommand{\penulis}{P.~E.~Nulis}
+\newcommand{\afiliasi}{Afiliasi Organisasi}
+\newcommand{\tanggal}{\today}
+
+% 3. Page style
+\pagestyle{scrheadings}
+\clearscrheadfoot % clear head and foot
+\setkomafont{pageheadfoot}{\normalfont\color{white}\sffamily} % setting for page head and foot
+% optical vertical centering of page contents
+\makeatletter
+\renewcommand*{\@textbottom}{\vskip \z@ \@plus 1fil}
+\newcommand*{\@texttop}{\vskip \z@ \@plus .5fil}
+\addtolength{\parskip}{\z@ \@plus .25fil} % stretch parskip
+\makeatother
+
+\definecolor{mybgcolor}{rgb}{0.41,0.60,0.55}
+\hypersetup{colorlinks=true,linkcolor=mybgcolor}
+
+% 4. Definition of the page head.
+\ihead{ % head left
+    \hspace{-2mm} %
+    \begin{tikzpicture}[remember picture,overlay]
+    \node[xshift=\paperwidth/2,yshift=-\headheight](mybar) at (current page.north west)[rectangle,
+    fill,inner sep=0pt,minimum width=\paperwidth,
+    minimum height=2\headheight,top color=mybgcolor!64,bottom color=mybgcolor]{}; % bar
+    \node[below of=mybar,yshift=3.3mm,rectangle,shade,
+    inner sep=0pt,minimum width=160mm,minimum height=1.5mm,top color=black!50,bottom color=white]{}; % shadow
+    \end{tikzpicture} %
+\textbf{\judul}
+}
+
+% 5. Definition of the page foot
+\ifoot{ % foot left
+    \hspace{-2mm} %
+    \begin{tikzpicture}[remember picture,overlay]
+    \node[xshift=\paperwidth/2,yshift=\footheight/2] at
+    (current page.south west)[rectangle,fill,inner sep=0pt,minimum width=\paperwidth,
+    minimum height=\footheight,top color=mybgcolor!64,bottom color=mybgcolor]{}; % bar
+    \end{tikzpicture}%
+    \vskip -11pt
+    {\footnotesize\bfseries\penulis\ \raisebox{0.2mm}{|}\ \afiliasi}
+}
+\ofoot{\vskip -11pt%
+    {\footnotesize\bfseries\thepage}
+}
+
+% 6. Settings for the table of content
+\AtBeginDocument{\renewcommand{\contentsname}{\large Daftar Isi}}% change name of toc
+\AtBeginDocument{\renewcommand{\abstractname}{\large Abstrak}}% change name of abstract
+\makeatletter
+\newtocstyle[noonewithdot]{nodotnopagenumber}{ % define tocstyle without dots and page numbers
+    \settocfeature{pagenumberbox}{\@gobble} %
+}
+\makeatother
+\usetocstyle{nodotnopagenumber}
+
+\hypersetup{colorlinks=true,allcolors=mybgcolor}
+
+% Some new environment
+% environment-1: definition
+\newcounter{definition}[section]\setcounter{definition}{0}
+\renewcommand{\thedefinition}{\arabic{section}.\arabic{definition}}
+\newenvironment{definition}[1]{%
+    \refstepcounter{definition}
+    % Code for box design goes here.
+    \mdfsetup{%
+        frametitle={%
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=mybgcolor!90]
+            {\strut  \textcolor{white}{Definisi~\thedefinition:~#1}};},%
+        innertopmargin=10pt,linecolor=blue!20,%
+        linewidth=2pt,topline=true,%
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+    }
+    \begin{mdframed}[]\relax%
+     }{%
+    \end{mdframed}}
+
+% environment-2: example
+\newenvironment{example}[0]{%
+    % Code for box design goes here.
+    \mdfsetup{%
+        frametitle={%
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=blue!20]
+            {\strut Contoh};},%
+        innertopmargin=10pt,linecolor=blue!20,%
+        linewidth=2pt,topline=true,%
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+    }
+    \begin{mdframed}[]\relax%
+    }{%
+\end{mdframed}}
+
+% environment-3: assignment
+\newenvironment{assignment}[0]{%
+    % Code for box design goes here.
+    \mdfsetup{%
+        frametitle={%
+            \tikz[baseline=(current bounding box.east),outer sep=0pt]
+            \node[anchor=east,rectangle,fill=blue!20]
+            {\strut TUGAS};},%
+        innertopmargin=10pt,linecolor=blue!20,%
+        linewidth=2pt,topline=true,%
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax%
+    }
+    \begin{mdframed}[]\relax%
+    }{%
+\end{mdframed}}
+
+\begin{document}
+
+\begin{flushleft}
+    {\Huge\sffamily\textcolor{mybgcolor}{\bfseries\judul}}
+
+    \vspace{2.5 true cm}
+
+    {\large\bfseries\itshape\penulis}
+
+    {\large\bfseries\itshape\afiliasi}
+
+    {\bfseries\tanggal}
+\end{flushleft}
+
+\thispagestyle{empty}
+
+\vfill
+\pagebreak
+
+\begin{abstract}
+\lipsum[7]
+\end{abstract}
+
+\vfill
+\pagebreak
+
+\tableofcontents
+
+\vfill
+\pagebreak
+
+\section{Lorem ipsum}
+\lipsum[1]
+
+\begin{example}
+Salah satu rumus yang sangat dikenal adalah
+
+\begin{equation}
+x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4 a c}}{2 a}
+\end{equation}
+\end{example}
+
+\vfill
+\pagebreak
+
+\section{Nam dui}
+\lipsum[2]
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{plot1}
+    \caption{Plot $\sin x$.}
+    \label{fig:plot1}
+\end{figure}
+
+\begin{itemize}
+\item \textcolor{mybgcolor}{\bfseries Lorem ipsum}
+\item \textcolor{blue}{\bfseries Nam dui}
+\item \textcolor{magenta}{\bfseries Nulla}
+\item \textbf{Quisque}
+\end{itemize}
+
+\begin{definition}{Lingkaran Besar}
+    Lingkaran besar di dalam suatu bola adalah lingkaran berjejari sama dengan jejari bola dan titik pusatnya berimpit dengan titik pusat bola.
+\end{definition}
+
+\vfill
+\pagebreak
+
+\section{Nulla}
+\lipsum[3]
+
+\vfill
+\pagebreak
+
+\section{Quisque}
+\lipsum[4-6] See~\cite{siess2000}.
+
+\vfill
+\pagebreak
+
+\begin{center}
+    \textbf{\large Comparation}
+\end{center}
+
+\begin{multicols}{2}
+
+    \begin{itemize}
+        \item Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        \item Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.
+        \item Curabitur dictum gravida  mauris.
+    \end{itemize}
+
+    \columnbreak
+
+    \begin{itemize}
+        \item Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        \item Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.
+        \item Curabitur dictum gravida  mauris.
+    \end{itemize}
+
+\end{multicols}
+
+\vfill
+\pagebreak
+
+\section{Commodo}
+\lipsum[7] See~\cite{stepien2002}.
+
+\begin{assignment}
+    Buatlah bagan lingkaran dan ilustrasi untuk penjelasan pengertian fungsi-fungsi trigonometri $ \sin $, $ \cos $, sec, dan cosec.
+\end{assignment}
+
+\bibliography{scripArt}
+\bibliographystyle{apalike}
+
+\end{document}
