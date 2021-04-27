@@ -1,3 +1,3 @@
 # latexTemplate
 
-Selected slides and articles LaTeX templates.
+Selected slides, article, and book (Tufte book style) LaTeX templates.
