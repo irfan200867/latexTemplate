@@ -1,0 +1,161 @@
+% PDF build: latex -> bibtex -> latex -> dvips -> ps2pdf
+\documentclass[11pt,aspectratio=169]{beamer}
+
+\usepackage[bahasa]{babel}
+\usepackage{lipsum}
+\usepackage[square]{natbib}             % bibliography style package
+
+\bibpunct{(}{)}{;}{a}{}{,}              % bibliography style format:
+                                        %         author [year]
+
+\usetheme{Madrid}
+
+\uselanguage{Bahasa}
+\languagepath{Bahasa}
+
+\deftranslation[to=Bahasa]{Theorem}{Teorema}
+\deftranslation[to=Bahasa]{Example}{Contoh}
+\deftranslation[to=Bahasa]{Definition}{Definisi}
+
+\title{Author's Beamer}
+\subtitle{Subtitle}
+\author{A~U~Thor}
+\logo{Affiliation Logo}
+\institute{Author's Affiliation}
+\date{\today}
+%\subject{}
+%\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{caption}[numbered]
+\hypersetup{colorlinks=false}
+%\hypersetup{colorlinks=true,allcolors=red}
+
+\begin{document}
+
+\begin{frame}[plain]
+\maketitle
+\end{frame}
+
+\begin{frame}{\contentsname}
+\tableofcontents
+\end{frame}
+
+\section{Lipsum}
+\begin{frame}{Lipsum}
+\lipsum[3]
+\end{frame}
+
+\section{Box}
+\begin{frame}{Box}
+\begin{block}{Box or Block}
+\lipsum[3]
+\end{block}
+\end{frame}
+
+\section{Theorem}
+\begin{frame}{A theorem in a box}
+\begin{theorem}
+Let $r, s$ be integers such that gcd$(r, s)=1$. Given integers $a,b$, there exists unique $x <rs$ such that
+\end{theorem}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{example}
+Salah satu rumus yang sangat dikenal adalah
+
+\begin{equation}
+    x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4 a c}}{2 a}
+\end{equation}
+\end{example}
+\end{frame}
+
+\begin{frame}{Definition}
+\begin{definition}
+Lingkaran besar adalah \ldots
+\end{definition}
+\end{frame}
+
+\section{Tables and Figures}
+\begin{frame}{Tables and Figures}
+Here is a short table:
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|c|r|} \hline
+First stuff & Second stuff & Third Stuff \\ \hline\hline
+foo & bar & bug \\ \hline
+foofoo & barbar & bugbug \\ \hline
+\end{tabular}
+\caption{\label{tab:one}This is the first table.}
+\end{center}
+\end{table}
+
+The above table is Table~\ref{tab:one}.  It is a ``nonfloat'', since
+it doesn't float at all, but appears right where it was placed in the
+document.
+\end{frame}
+
+\section{\texttt{picture} Environments}
+\begin{frame}{\texttt{picture} Environments}
+
+\begin{figure}
+\begin{center}
+\setlength{\unitlength}{.08in}
+\begin{picture}(30,30)(0,0)
+%\thicklines         % don't know why it looks worse with this
+%\put(6,21){\framebox(6,6){gnat}}
+\put(0,21){\framebox(7,7){gnat}}
+\put(18,12){\circle{20}}
+\put(18,12){\vector(0,1){2}}
+\put(25,21){\circle*{5}}
+\put(18,12){\oval(20,25)}
+\end{picture}
+\end{center}
+\caption{Isn't this a pretty picture?}
+\end{figure}
+\end{frame}
+
+
+\section{Columns / Block}
+\begin{frame}{Columns / Block}
+
+\begin{columns}
+\column{0.48\linewidth}
+\begin{block}{Block 1}
+This is Block 1
+\end{block}
+
+\column{0.48\linewidth}
+\begin{block}{Block 2}
+This is Block 2
+\end{block}
+\end{columns}
+
+\begin{columns}
+\column{0.48\linewidth}
+\begin{block}{Block 3}
+This is Block 3
+\end{block}
+
+\column{0.48\linewidth}
+\begin{block}{Block 4}
+This is Block 4
+\end{block}
+\end{columns}
+
+\end{frame}
+
+\section{Citation}
+\begin{frame}{Citation}
+We can cite references like \cite{siess2000} and \cite{stepien2002}.
+\end{frame}
+
+\section{\refname}
+\begin{frame}{\refname}
+\bibliography{scripArt}
+\bibliographystyle{authordate1}
+
+\end{frame}
+
+\end{document}
