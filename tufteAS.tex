@@ -26,10 +26,14 @@
 \author{P.~E.~Nulis}
 \date{2021}
 
+\fancyfoot[LO,RE]{\hfill\copyright\number\year,~\smallcaps{\plainauthor}}
+
 \begin{document}
 \pagenumbering{roman}
 \maketitle
+\thispagestyle{empty}
 \tableofcontents
+\pagestyle{fancy}
 \addcontentsline{toc}{chapter}{Daftar Isi}
 \listoffigures
 \addcontentsline{toc}{chapter}{Daftar Gambar}
@@ -125,15 +129,15 @@ See Table~(\ref{tabContoh}), or Figure~(\ref{gbrContoh}), Example~(\ref{cthConto
 \section{Full width text}
 
 \begin{fullwidth}
-\lipsum[1-3]
+\lipsum[1-2]
 \end{fullwidth}
-
+\newpage
 \lipsum[3]
 
 \appendix
 
 \part{Lampiran}
-
+\pagenumbering{Roman}
 \chapter{Data}
 \lipsum
 
