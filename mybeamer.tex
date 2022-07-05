@@ -1,7 +1,7 @@
 % PDF build: latex -> bibtex -> latex -> dvips -> ps2pdf
 \documentclass[11pt,aspectratio=169]{beamer}
 
-\usepackage[bahasa]{babel}
+\usepackage[bahasa,english]{babel}
 \usepackage{lipsum}
 \usepackage[square]{natbib}             % bibliography style package
 
@@ -12,27 +12,27 @@
 
 \uselanguage{Bahasa}
 \languagepath{Bahasa}
-
+% Some box titles translations
 \deftranslation[to=Bahasa]{Theorem}{Teorema}
 \deftranslation[to=Bahasa]{Example}{Contoh}
 \deftranslation[to=Bahasa]{Definition}{Definisi}
 
-\title{Author's Beamer}
-\subtitle{Subtitle}
-\author{A~U~Thor}
+\title{Beamer Presentation}
+\subtitle{\LaTeX\ Scripts in Bahasa and English}
+\author[Nulis \& Thor]{\textit{P~E~Nulis}$^1$ \and \textit{A~U~Thor}$^2$}
 \logo{Affiliation Logo}
-\institute{Author's Affiliation}
+\institute[Affiliation One \& Affiliation Two]{$^1$Affiliation One\\ $^2$Affiliation Two}
 \date{\today}
 %\subject{}
 %\setbeamercovered{transparent}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{theorems}[numbered]
 \setbeamertemplate{caption}[numbered]
-\hypersetup{colorlinks=false}
-%\hypersetup{colorlinks=true,allcolors=red}
+%\hypersetup{colorlinks=false}
+\hypersetup{colorlinks=true,allcolors=blue}
 
 \begin{document}
-
+\selectlanguage{bahasa} % by default, using last item in list [bahasa,english]
 \begin{frame}[plain]
 \maketitle
 \end{frame}
