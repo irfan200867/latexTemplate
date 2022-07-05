@@ -1,17 +1,19 @@
 % PDF build: latex -> bibtex -> latex -> dvips -> ps2pdf
 \documentclass[11pt,a4paper]{article}
 \usepackage{amsmath,amsfonts,amssymb,graphicx,hyperref,xcolor,multicol,lipsum}
+\usepackage[bahasa,english]{babel}
 \usepackage[square]{natbib}             % bibliography style package
 
 \bibpunct{(}{)}{;}{a}{}{,}              % bibliography style format:
                                         %         author [year]
 \hypersetup{colorlinks=true,allcolors=darkgray}
 
-\title{Judul}
-\author{P. E. Nulis}
+\title{Judul and Title: Bilingual Paper}
+\author{\textit{P. E. Nulis} \and \textit{A. U. Thor}}
 \date{\today}
 
 \begin{document}
+\selectlanguage{bahasa} % by default, using last item in list [bahasa,english]
 \maketitle
 
 \begin{abstract}
